@@ -159,7 +159,7 @@ void main() {
     (WidgetTester tester) async {
       await ApiUtils().signupUser().first;
 
-      await AppRobot(tester).startApp(keyToFind: "home_map");
+      await AppRobot(tester).startApp(keyToFind: "home_page");
 
       expect(find.byType(HomePage), findsOneWidget);
     },

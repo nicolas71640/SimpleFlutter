@@ -11,8 +11,7 @@ class HomePage extends StatelessWidget {
           onTap: () {
             FocusScope.of(context).requestFocus(FocusNode());
           },
-          child: const Center(child: Text("HOME PAGE"))),
+          child: const Center(child: Text(key: Key("home_page"), "HOME PAGE"))),
     );
   }
-
 }
