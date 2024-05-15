@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "133956385153",
+    "project_id": "avecpaulette-50195",
+    "storage_bucket": "avecpaulette-50195.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:133956385153:android:a4f70370addeb1b6ec9080",
+        "android_client_info": {
+          "package_name": "com.avecpaulette"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "133956385153-hi4nbpp1rc31icbbhrg5b9mgjk490mlr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.avecpaulette",
+            "certificate_hash": "4ea9d6ec8b99af90e817301c83d84e27b66c5995"
+          }
+        },
+        {
+          "client_id": "133956385153-ighhhcuao5mk6iu9irt1i87p684m4nm1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.avecpaulette",
+            "certificate_hash": "e7a6e6e6a26ed2777fc5ce5d8654d8d69b099de0"
+          }
+        },
+        {
+          "client_id": "133956385153-m1tbp99veg8o4ignb387k46hv479idrj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRcRfo6xTNjQhc1YIANYEjZQuxorczH9k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "133956385153-m1tbp99veg8o4ignb387k46hv479idrj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "133956385153-gv4npsrs7ghdimevhid9ak1qivum4vcn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.avecpaulette"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

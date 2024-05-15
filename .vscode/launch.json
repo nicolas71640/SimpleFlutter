@@ -1,0 +1,98 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Frontend: Launch App",
+            "type": "dart",
+            "request": "launch",
+            "program": "frontend/lib/main.dart",
+            "toolArgs": [
+                "-v",
+                "--web-browser-flag", "--no-sandbox",
+                "--web-browser-flag", "--enable-features=UseOzonePlatform",
+                "--web-browser-flag", "--ozone-platform=wayland",
+                "--web-browser-flag", "--disable-dev-shm-usage",
+                "--dart-define=FIREBASE_ENABLED=false",
+                "--dart-define=BASE_URL=http://172.20.0.4:3000/api"
+            ]
+        },
+        {
+            "name": "Frontend: Run Unit Tests",
+            "type": "dart",
+            "request": "launch",
+            "program": "./frontend/test/",
+            "args": [
+                "-v",
+                "--coverage",
+                "--dart-define=FIREBASE_ENABLED=false",
+                "--dart-define=BASE_URL=http://172.20.0.4:3000/api"
+            ]
+        },
+        {
+            "name": "Frontend: Run Integration Tests",
+            "type": "dart",
+            "request": "launch",
+            "program": "./frontend/integration_test/tests",
+            "toolArgs": [
+                "-v",
+                "--dart-define=FIREBASE_ENABLED=false",
+                "--dart-define=BASE_URL=http://172.20.0.4:3000/api"
+            ]
+        },
+        {
+            "name": "Run",
+            "type": "dart",
+            "request": "launch",
+            "codeLens": {
+                "path": "./frontend/integration_test/",
+                "for": [
+                    "run-test",
+                    "run-test-file"
+                ]
+            },
+            "toolArgs": [
+                "-v",
+                "--dart-define=FIREBASE_ENABLED=false",
+                "--dart-define=BASE_URL=http://172.20.0.4:3000/api"
+            ]
+        },
+        {
+            "name": "Debug",
+            "type": "dart",
+            "request": "launch",
+            "codeLens": {
+                "path": "./frontend/integration_test/",
+                "for": [
+                    "debug-test",
+                    "debug-test-file"
+                ]
+            },
+            "toolArgs": [
+                "-v",
+                "--dart-define=FIREBASE_ENABLED=false",
+                "--dart-define=BASE_URL=http://172.20.0.4:3000/api"
+            ]
+        },
+
+        {
+            "name": "Run",
+            "type": "dart",
+            "request": "launch",
+            "program": "./frontend/test",
+            "codeLens": {
+                "path": "/frontend/test/",
+                "for": [
+                    "run-test",
+                    "run-test-file"
+                ]
+            },
+            "toolArgs": [
+                "-v",
+                "--coverage",
+            ]
+        },
+    ]
+}
