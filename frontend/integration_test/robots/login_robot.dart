@@ -23,11 +23,6 @@ class LoginRobot extends Robot {
     await tester.pumpAndSettle();
   }
 
-  Future signInWithGoogle() async {
-    await tester.tap(find.text("Sign in with Google"));
-    await tester.pumpAndSettle();
-  }
-
   Future goToForgottenPassword() async {
     await tester.tap(find.text("Have you forgotten your password ?"));
     await tester.pumpAndSettle();
