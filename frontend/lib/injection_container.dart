@@ -17,15 +17,6 @@ import 'package:avecpaulette/features/departmentsViewer/data/repositories/number
 import 'package:avecpaulette/features/departmentsViewer/domain/repositories/number_trivia_repository.dart';
 import 'package:avecpaulette/features/departmentsViewer/domain/usecases/get_concrete_number_trivia_usecase.dart';
 import 'package:avecpaulette/features/departmentsViewer/domain/usecases/get_random_number_trivia_usecase.dart';
-import 'package:avecpaulette/features/home/data/datasources/cottage_api_service.dart';
-import 'package:avecpaulette/features/home/data/datasources/location_service.dart';
-import 'package:avecpaulette/features/home/data/datasources/suggestion_service.dart';
-import 'package:avecpaulette/features/home/data/repositories/cottage_repository_impl.dart';
-import 'package:avecpaulette/features/home/data/repositories/location_repository_impl.dart';
-import 'package:avecpaulette/features/home/domain/repositories/cottage_repository.dart';
-import 'package:avecpaulette/features/home/domain/repositories/location_repository.dart';
-import 'package:avecpaulette/features/home/domain/usecases/cottage_usecase.dart';
-import 'package:avecpaulette/features/home/domain/usecases/location_usecase.dart';
 import 'package:avecpaulette/features/home/presentation/bloc/home_bloc.dart';
 import 'package:avecpaulette/features/stuff/data/datasources/stuff_api_service.dart';
 import 'package:avecpaulette/features/stuff/domain/repositories/stuff_repository.dart';
@@ -35,18 +26,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:location/location.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:uuid/uuid.dart';
 
 import 'core/local_data_source/credentials_local_data_source.dart';
 import 'core/util/input_converter.dart';
 import 'features/departmentsViewer/presentation/bloc/number_trivia_bloc.dart';
 import 'package:http/http.dart' as http;
 
-import 'features/home/data/repositories/suggestion_repository_impl.dart';
-import 'features/home/domain/repositories/suggestion_repository.dart';
-import 'features/home/domain/usecases/suggestion_usecase.dart';
 import 'features/stuff/data/repositories/stuff_repository_impl.dart';
 
 final sl = GetIt.instance;
@@ -72,7 +58,7 @@ void initFeatures() {
   sl.registerFactory(() => ForgottenPasswordBloc(sl()));
   sl.registerFactory(() => SignupBloc(sl()));
   sl.registerFactory(() => StuffBloc(sl()));
-  sl.registerFactory(() => HomeBloc(sl(), sl(), sl()));
+  sl.registerFactory(() => HomeBloc());
 
   //UseCases, Lazy = only created when called, Regular = created when the app starts
   sl.registerLazySingleton(() => GetConcreteNumberTriviaUseCase(sl()));
@@ -82,9 +68,6 @@ void initFeatures() {
   sl.registerLazySingleton(() => SignupUseCase(sl()));
   sl.registerLazySingleton(() => GetStuffUseCase(sl()));
   sl.registerLazySingleton(() => ForgottenPasswordUseCase(sl()));
-  sl.registerLazySingleton(() => CottageUseCase(sl()));
-  sl.registerLazySingleton(() => LocationUseCase(sl()));
-  sl.registerLazySingleton(() => SuggestionUseCase(sl()));
 
   // Repositories
   sl.registerLazySingleton<NumberTriviaRepository>(
@@ -97,12 +80,6 @@ void initFeatures() {
       () => CredentialsRepositoryImpl(sl(), sl()));
   sl.registerLazySingleton<StuffRepository>(
       () => StuffRepositoryImpl(sl(), sl()));
-  sl.registerLazySingleton<CottageRepository>(
-      () => CottageRepositoryImpl(sl()));
-  sl.registerLazySingleton<LocationRepository>(
-      () => LocationRepositoryImpl(sl()));
-  sl.registerLazySingleton<SuggestionRepository>(
-      () => SuggestionRepositoryImpl(sl()));
 
   //Data Sources
   sl.registerLazySingleton<NumberTriviaRemoteDataSource>(
@@ -124,12 +101,6 @@ void initFeatures() {
       () => CredentialsApiService(sl(instanceName: "CredentialsDio")));
   sl.registerLazySingleton<StuffApiService>(
       () => StuffApiService(sl(instanceName: "InternalDio")));
-  sl.registerLazySingleton<CottageApiService>(
-      () => CottageApiService(sl(instanceName: "InternalDio")));
-  sl.registerLazySingleton<LocationService>(() => LocationService(sl()));
-  sl.registerLazySingleton<Location>(() => Location());
-  sl.registerLazySingleton<SuggestionService>(
-      () => SuggestionService(sl(instanceName: "Dio"), const Uuid().v4()));
 }
 
 void initCore() {

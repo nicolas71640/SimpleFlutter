@@ -3,36 +3,18 @@ import 'dart:io';
 import 'package:avecpaulette/injection_container.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:google_maps_flutter_platform_interface/google_maps_flutter_platform_interface.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:location/location.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 
-import '../../test/features/home/data/datasource/location_service_test.mocks.dart';
 import '../utils/api_utils.dart';
 import '../utils/test_utils.dart';
 
-@GenerateMocks([Location, LocationData])
 main() {
   IntegrationTestWidgetsFlutterBinding binding =
       IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  GoogleMapsFlutterPlatform.instance.enableDebugInspection();
-
-  late MockLocation mockLocation;
 
   setUp(() async {
     init();
-
-    sl.unregister<Location>();
-    mockLocation = MockLocation();
-    final locationData = MockLocationData();
-    when(locationData.latitude).thenReturn(48.853543);
-    when(locationData.longitude).thenReturn(2.337553);
-    when(mockLocation.getLocation())
-        .thenAnswer((_) => Future.value(locationData));
-    sl.registerLazySingleton<Location>(() => mockLocation);
 
     await sl.allReady();
     await ApiUtils().cleanLocalDb().first;

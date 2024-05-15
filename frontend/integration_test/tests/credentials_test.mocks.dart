@@ -3,43 +3,25 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
-import 'dart:ui' as _i14;
+import 'dart:async' as _i4;
 
 import 'package:avecpaulette/features/credentials/data/datasources/credentials_api_service.dart'
-    as _i4;
-import 'package:avecpaulette/features/credentials/data/models/api/forget_password_request.dart'
-    as _i12;
-import 'package:avecpaulette/features/credentials/data/models/api/forget_password_response.dart'
-    as _i11;
-import 'package:avecpaulette/features/credentials/data/models/api/login_request.dart'
-    as _i9;
-import 'package:avecpaulette/features/credentials/data/models/api/login_response.dart'
-    as _i8;
-import 'package:avecpaulette/features/credentials/data/models/api/refresh_token_response.dart'
-    as _i10;
-import 'package:avecpaulette/features/credentials/data/models/api/signup_request.dart'
-    as _i7;
-import 'package:avecpaulette/features/credentials/data/models/api/signup_response.dart'
-    as _i6;
-import 'package:avecpaulette/features/home/data/datasources/suggestion_service.dart'
-    as _i15;
-import 'package:avecpaulette/features/home/data/models/api/find_place_item_response.dart'
-    as _i18;
-import 'package:avecpaulette/features/home/data/models/api/find_place_request.dart'
-    as _i19;
-import 'package:avecpaulette/features/home/data/models/api/get_place_details_request.dart'
-    as _i21;
-import 'package:avecpaulette/features/home/data/models/api/get_place_details_response.dart'
-    as _i20;
-import 'package:avecpaulette/features/home/data/models/api/suggestion_item_response.dart'
-    as _i16;
-import 'package:avecpaulette/features/home/data/models/api/suggestion_request.dart'
-    as _i17;
-import 'package:dio/dio.dart' as _i2;
-import 'package:location/location.dart' as _i13;
-import 'package:location_platform_interface/location_platform_interface.dart'
     as _i3;
+import 'package:avecpaulette/features/credentials/data/models/api/forget_password_request.dart'
+    as _i11;
+import 'package:avecpaulette/features/credentials/data/models/api/forget_password_response.dart'
+    as _i10;
+import 'package:avecpaulette/features/credentials/data/models/api/login_request.dart'
+    as _i8;
+import 'package:avecpaulette/features/credentials/data/models/api/login_response.dart'
+    as _i7;
+import 'package:avecpaulette/features/credentials/data/models/api/refresh_token_response.dart'
+    as _i9;
+import 'package:avecpaulette/features/credentials/data/models/api/signup_request.dart'
+    as _i6;
+import 'package:avecpaulette/features/credentials/data/models/api/signup_response.dart'
+    as _i5;
+import 'package:dio/dio.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -63,21 +45,11 @@ class _FakeDio_0 extends _i1.SmartFake implements _i2.Dio {
         );
 }
 
-class _FakeLocationData_1 extends _i1.SmartFake implements _i3.LocationData {
-  _FakeLocationData_1(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
 /// A class which mocks [CredentialsApiService].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockCredentialsApiService extends _i1.Mock
-    implements _i4.CredentialsApiService {
+    implements _i3.CredentialsApiService {
   MockCredentialsApiService() {
     _i1.throwOnMissingStub(this);
   }
@@ -91,232 +63,40 @@ class MockCredentialsApiService extends _i1.Mock
         ),
       ) as _i2.Dio);
   @override
-  _i5.Stream<_i6.SignupResponse> signup(_i7.SignupRequest? signupRequest) =>
+  _i4.Stream<_i5.SignupResponse> signup(_i6.SignupRequest? signupRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #signup,
           [signupRequest],
         ),
-        returnValue: _i5.Stream<_i6.SignupResponse>.empty(),
-      ) as _i5.Stream<_i6.SignupResponse>);
+        returnValue: _i4.Stream<_i5.SignupResponse>.empty(),
+      ) as _i4.Stream<_i5.SignupResponse>);
   @override
-  _i5.Stream<_i8.LoginResponse> login(_i9.LoginRequest? loginRequest) =>
+  _i4.Stream<_i7.LoginResponse> login(_i8.LoginRequest? loginRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #login,
           [loginRequest],
         ),
-        returnValue: _i5.Stream<_i8.LoginResponse>.empty(),
-      ) as _i5.Stream<_i8.LoginResponse>);
+        returnValue: _i4.Stream<_i7.LoginResponse>.empty(),
+      ) as _i4.Stream<_i7.LoginResponse>);
   @override
-  _i5.Stream<_i10.RefreshTokenResponse> refreshToken(String? refreshToken) =>
+  _i4.Stream<_i9.RefreshTokenResponse> refreshToken(String? refreshToken) =>
       (super.noSuchMethod(
         Invocation.method(
           #refreshToken,
           [refreshToken],
         ),
-        returnValue: _i5.Stream<_i10.RefreshTokenResponse>.empty(),
-      ) as _i5.Stream<_i10.RefreshTokenResponse>);
+        returnValue: _i4.Stream<_i9.RefreshTokenResponse>.empty(),
+      ) as _i4.Stream<_i9.RefreshTokenResponse>);
   @override
-  _i5.Stream<_i11.ForgetPasswordResponse> forgetPassword(
-          _i12.ForgetPasswordRequest? forgetPasswordRequest) =>
+  _i4.Stream<_i10.ForgetPasswordResponse> forgetPassword(
+          _i11.ForgetPasswordRequest? forgetPasswordRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #forgetPassword,
           [forgetPasswordRequest],
         ),
-        returnValue: _i5.Stream<_i11.ForgetPasswordResponse>.empty(),
-      ) as _i5.Stream<_i11.ForgetPasswordResponse>);
-}
-
-/// A class which mocks [Location].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockLocation extends _i1.Mock implements _i13.Location {
-  MockLocation() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i5.Stream<_i3.LocationData> get onLocationChanged => (super.noSuchMethod(
-        Invocation.getter(#onLocationChanged),
-        returnValue: _i5.Stream<_i3.LocationData>.empty(),
-      ) as _i5.Stream<_i3.LocationData>);
-  @override
-  _i5.Future<bool> changeSettings({
-    _i3.LocationAccuracy? accuracy = _i3.LocationAccuracy.high,
-    int? interval = 1000,
-    double? distanceFilter = 0.0,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #changeSettings,
-          [],
-          {
-            #accuracy: accuracy,
-            #interval: interval,
-            #distanceFilter: distanceFilter,
-          },
-        ),
-        returnValue: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
-  @override
-  _i5.Future<bool> isBackgroundModeEnabled() => (super.noSuchMethod(
-        Invocation.method(
-          #isBackgroundModeEnabled,
-          [],
-        ),
-        returnValue: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
-  @override
-  _i5.Future<bool> enableBackgroundMode({bool? enable = true}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #enableBackgroundMode,
-          [],
-          {#enable: enable},
-        ),
-        returnValue: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
-  @override
-  _i5.Future<_i3.LocationData> getLocation() => (super.noSuchMethod(
-        Invocation.method(
-          #getLocation,
-          [],
-        ),
-        returnValue: _i5.Future<_i3.LocationData>.value(_FakeLocationData_1(
-          this,
-          Invocation.method(
-            #getLocation,
-            [],
-          ),
-        )),
-      ) as _i5.Future<_i3.LocationData>);
-  @override
-  _i5.Future<_i3.PermissionStatus> hasPermission() => (super.noSuchMethod(
-        Invocation.method(
-          #hasPermission,
-          [],
-        ),
-        returnValue: _i5.Future<_i3.PermissionStatus>.value(
-            _i3.PermissionStatus.granted),
-      ) as _i5.Future<_i3.PermissionStatus>);
-  @override
-  _i5.Future<_i3.PermissionStatus> requestPermission() => (super.noSuchMethod(
-        Invocation.method(
-          #requestPermission,
-          [],
-        ),
-        returnValue: _i5.Future<_i3.PermissionStatus>.value(
-            _i3.PermissionStatus.granted),
-      ) as _i5.Future<_i3.PermissionStatus>);
-  @override
-  _i5.Future<bool> serviceEnabled() => (super.noSuchMethod(
-        Invocation.method(
-          #serviceEnabled,
-          [],
-        ),
-        returnValue: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
-  @override
-  _i5.Future<bool> requestService() => (super.noSuchMethod(
-        Invocation.method(
-          #requestService,
-          [],
-        ),
-        returnValue: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
-  @override
-  _i5.Future<_i3.AndroidNotificationData?> changeNotificationOptions({
-    String? channelName,
-    String? title,
-    String? iconName,
-    String? subtitle,
-    String? description,
-    _i14.Color? color,
-    bool? onTapBringToFront,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #changeNotificationOptions,
-          [],
-          {
-            #channelName: channelName,
-            #title: title,
-            #iconName: iconName,
-            #subtitle: subtitle,
-            #description: description,
-            #color: color,
-            #onTapBringToFront: onTapBringToFront,
-          },
-        ),
-        returnValue: _i5.Future<_i3.AndroidNotificationData?>.value(),
-      ) as _i5.Future<_i3.AndroidNotificationData?>);
-}
-
-/// A class which mocks [LocationData].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockLocationData extends _i1.Mock implements _i3.LocationData {
-  MockLocationData() {
-    _i1.throwOnMissingStub(this);
-  }
-}
-
-/// A class which mocks [SuggestionService].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockSuggestionService extends _i1.Mock implements _i15.SuggestionService {
-  MockSuggestionService() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i2.Dio get dio => (super.noSuchMethod(
-        Invocation.getter(#dio),
-        returnValue: _FakeDio_0(
-          this,
-          Invocation.getter(#dio),
-        ),
-      ) as _i2.Dio);
-  @override
-  String get sessionToken => (super.noSuchMethod(
-        Invocation.getter(#sessionToken),
-        returnValue: '',
-      ) as String);
-  @override
-  String get apiKey => (super.noSuchMethod(
-        Invocation.getter(#apiKey),
-        returnValue: '',
-      ) as String);
-  @override
-  _i5.Stream<List<_i16.SuggestionItemResponse>> getSuggestions(
-          _i17.SuggestionRequest? request) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getSuggestions,
-          [request],
-        ),
-        returnValue: _i5.Stream<List<_i16.SuggestionItemResponse>>.empty(),
-      ) as _i5.Stream<List<_i16.SuggestionItemResponse>>);
-  @override
-  _i5.Stream<List<_i18.FindPlaceItemResponse>> findPlace(
-          _i19.FindPlaceRequest? request) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #findPlace,
-          [request],
-        ),
-        returnValue: _i5.Stream<List<_i18.FindPlaceItemResponse>>.empty(),
-      ) as _i5.Stream<List<_i18.FindPlaceItemResponse>>);
-  @override
-  _i5.Stream<_i20.GetPlaceDetailsResult> getPlaceDetails(
-          _i21.GetPlaceDetailsRequest? request) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getPlaceDetails,
-          [request],
-        ),
-        returnValue: _i5.Stream<_i20.GetPlaceDetailsResult>.empty(),
-      ) as _i5.Stream<_i20.GetPlaceDetailsResult>);
+        returnValue: _i4.Stream<_i10.ForgetPasswordResponse>.empty(),
+      ) as _i4.Stream<_i10.ForgetPasswordResponse>);
 }

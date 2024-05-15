@@ -30,17 +30,7 @@ class LoginPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 30, bottom: 30),
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: const FlutterLogo(),
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
+                Center(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
