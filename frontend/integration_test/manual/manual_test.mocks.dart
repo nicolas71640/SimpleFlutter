@@ -66,12 +66,4 @@ class MockLoginUseCase extends _i1.Mock implements _i3.LoginUseCase {
         ),
         returnValue: _i4.Stream<_i5.User>.empty(),
       ) as _i4.Stream<_i5.User>);
-  @override
-  _i4.Stream<_i5.User> googleLogin() => (super.noSuchMethod(
-        Invocation.method(
-          #googleLogin,
-          [],
-        ),
-        returnValue: _i4.Stream<_i5.User>.empty(),
-      ) as _i4.Stream<_i5.User>);
 }

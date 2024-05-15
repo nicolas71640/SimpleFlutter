@@ -5,12 +5,10 @@ import 'package:avecpaulette/core/local_data_source/credentials_local_data_sourc
 import 'package:avecpaulette/features/credentials/data/datasources/credentials_api_service.dart';
 import 'package:avecpaulette/features/credentials/data/models/api/forget_password_response.dart';
 import 'package:avecpaulette/features/credentials/data/models/api/login_response.dart';
-import 'package:avecpaulette/features/credentials/data/models/api/oauth_response.dart';
 import 'package:avecpaulette/features/credentials/data/models/api/signup_response.dart';
 import 'package:avecpaulette/features/credentials/data/repositories/credentials_repository_impl.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
@@ -19,44 +17,24 @@ import 'credentials_repository_impl_test.mocks.dart';
 @GenerateMocks([
   CredentialsApiService,
   CredentialsLocalDataSourceImpl,
-  GoogleSignIn,
-  GoogleSignInAccount,
-  GoogleSignInAuthentication,
 ])
 void main() {
   late MockCredentialsApiService mockCredentialsApiService;
   late MockCredentialsLocalDataSourceImpl mockCredentialsLocalDataSourceImpl;
-  late MockGoogleSignIn mockGoogleSignIn;
-  late MockGoogleSignInAccount mockGoogleSignInAccount;
-  late MockGoogleSignInAuthentication mockGoogleSignInAuthentication;
-
   late CredentialsRepositoryImpl credentialsRepositoryImpl;
 
   setUp(() {
     mockCredentialsApiService = MockCredentialsApiService();
     mockCredentialsLocalDataSourceImpl = MockCredentialsLocalDataSourceImpl();
-    mockGoogleSignIn = MockGoogleSignIn();
-    mockGoogleSignInAccount = MockGoogleSignInAccount();
-    mockGoogleSignInAuthentication = MockGoogleSignInAuthentication();
 
     credentialsRepositoryImpl = CredentialsRepositoryImpl(
-        mockCredentialsApiService,
-        mockCredentialsLocalDataSourceImpl,
-        mockGoogleSignIn);
+        mockCredentialsApiService, mockCredentialsLocalDataSourceImpl);
 
     when(mockCredentialsLocalDataSourceImpl.cacheCredentials(any, any, any))
         .thenAnswer((_) => Stream.value(null));
 
     when(mockCredentialsApiService.signup(any))
         .thenAnswer((_) => Stream.value(SignupResponse("User Created")));
-
-    when(mockGoogleSignIn.signIn())
-        .thenAnswer((_) => Future.value(mockGoogleSignInAccount));
-
-    when(mockGoogleSignInAccount.authentication)
-        .thenAnswer((_) => Future.value(mockGoogleSignInAuthentication));
-
-    when(mockGoogleSignInAuthentication.idToken).thenAnswer((_) => "idToken");
   });
 
   group("signup", () {
@@ -176,73 +154,6 @@ void main() {
 
       expect(credentialsRepositoryImpl.login("email", "password"),
           emitsError(error));
-    });
-  });
-
-  group("googleLogin", () {
-    test("should return a User when no error is thrown ", () async {
-      const email = "email@test.com";
-      const accessToken = "accessToken";
-      const refreshToken = "refreshToken";
-
-      when(mockCredentialsApiService.oauth(any)).thenAnswer(
-          (_) => Stream.value(OAuthResponse(email, accessToken, refreshToken)));
-
-      final user = await credentialsRepositoryImpl.googleLogin().first;
-
-      expect(user.mail, equals(email));
-      verify(mockCredentialsLocalDataSourceImpl.cacheCredentials(
-          email, accessToken, refreshToken));
-    });
-
-    test("should return a ServerFailure when Google can't sign in", () async {
-      when(mockGoogleSignIn.signIn()).thenAnswer((_) => Future.value(null));
-
-      expect(credentialsRepositoryImpl.googleLogin(),
-          emitsError(const TypeMatcher<ServerFailure>()));
-    });
-
-    test(
-        "should return a EmailAlreadyUsed when a dio error is thrown with a status code unauthorized",
-        () async {
-      final dioError = DioError(
-          requestOptions: RequestOptions(path: ""),
-          response: Response(
-              statusCode: HttpStatus.unauthorized,
-              requestOptions: RequestOptions(path: "")));
-
-      when(mockCredentialsApiService.oauth(any))
-          .thenAnswer((_) => Stream.error(dioError));
-
-      expect(credentialsRepositoryImpl.googleLogin(),
-          emitsError(const TypeMatcher<EmailAlreadyUsed>()));
-    });
-
-    test(
-        "should throw a ServerFailure error when a  dio error is thrown with another status code than unauthorized ",
-        () async {
-      final dioError = DioError(
-          requestOptions: RequestOptions(path: ""),
-          response: Response(
-              statusCode: HttpStatus.badRequest,
-              requestOptions: RequestOptions(path: "")));
-
-      when(mockCredentialsApiService.oauth(any))
-          .thenAnswer((_) => Stream.error(dioError));
-
-      expect(credentialsRepositoryImpl.googleLogin(),
-          emitsError(const TypeMatcher<ServerFailure>()));
-    });
-
-    test(
-        "should throw the same error when another error than a dio error is thrown ",
-        () async {
-      final error = Error();
-
-      when(mockCredentialsApiService.oauth(any))
-          .thenAnswer((_) => Stream.error(error));
-
-      expect(credentialsRepositoryImpl.googleLogin(), emitsError(error));
     });
   });
 

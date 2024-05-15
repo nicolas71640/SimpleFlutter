@@ -1,7 +1,5 @@
 // ignore_for_file: constant_identifier_names
 
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:avecpaulette/features/credentials/domain/usecases/login_usecase.dart';
 import 'package:equatable/equatable.dart';
@@ -25,18 +23,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         loginUseCase.call(event.mail, event.password),
         onData: (users) => Logged(),
         onError: (_, __) => SignInError(message: WRONG_ID_MESSAGE),
-      );
-    });
-
-    on<TryGoogleLoginEvent>((event, emit) async {
-      emit(GoogleSignInLoading());
-      await emit.forEach<User>(
-        loginUseCase.googleLogin(),
-        onData: (users) => Logged(),
-        onError: (error, stack) {
-          log(error.toString());
-          return GoogleSignInError(message: GOOGLE_SIGNIN_ERROR);
-        },
       );
     });
   }

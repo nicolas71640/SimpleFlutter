@@ -9,6 +9,9 @@ part of 'get_place_details_request.dart';
 Map<String, dynamic> _$GetPlaceDetailsRequestToJson(
         GetPlaceDetailsRequest instance) =>
     <String, dynamic>{
+      'stringify': instance.stringify,
+      'hashCode': instance.hashCode,
       'placeId': instance.placeId,
       'lang': instance.lang,
+      'props': instance.props,
     };

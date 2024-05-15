@@ -9,7 +9,6 @@
 import 'package:firebase_analytics_web/firebase_analytics_web.dart';
 import 'package:firebase_core_web/firebase_core_web.dart';
 import 'package:flutter_secure_storage_web/flutter_secure_storage_web.dart';
-import 'package:google_sign_in_web/google_sign_in_web.dart';
 import 'package:location_web/location_web.dart';
 import 'package:shared_preferences_web/shared_preferences_web.dart';
 
@@ -20,7 +19,6 @@ void registerPlugins(Registrar registrar) {
   FirebaseAnalyticsWeb.registerWith(registrar);
   FirebaseCoreWeb.registerWith(registrar);
   FlutterSecureStorageWeb.registerWith(registrar);
-  GoogleSignInPlugin.registerWith(registrar);
   LocationWebPlugin.registerWith(registrar);
   SharedPreferencesPlugin.registerWith(registrar);
   registrar.registerMessageHandler();

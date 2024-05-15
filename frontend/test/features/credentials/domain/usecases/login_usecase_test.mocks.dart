@@ -47,14 +47,6 @@ class MockCredentialsRepository extends _i1.Mock
         returnValue: _i3.Stream<_i4.User>.empty(),
       ) as _i3.Stream<_i4.User>);
   @override
-  _i3.Stream<_i4.User> googleLogin() => (super.noSuchMethod(
-        Invocation.method(
-          #googleLogin,
-          [],
-        ),
-        returnValue: _i3.Stream<_i4.User>.empty(),
-      ) as _i3.Stream<_i4.User>);
-  @override
   _i3.Stream<_i4.User> signup(
     String? mail,
     String? password,

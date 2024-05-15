@@ -34,7 +34,6 @@ import 'package:avecpaulette/features/stuff/presentation/bloc/bloc/stuff_bloc.da
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:location/location.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -95,7 +94,7 @@ void initFeatures() {
             networkInfo: sl(),
           ));
   sl.registerLazySingleton<CredentialsRepository>(
-      () => CredentialsRepositoryImpl(sl(), sl(), sl()));
+      () => CredentialsRepositoryImpl(sl(), sl()));
   sl.registerLazySingleton<StuffRepository>(
       () => StuffRepositoryImpl(sl(), sl()));
   sl.registerLazySingleton<CottageRepository>(
@@ -125,9 +124,6 @@ void initFeatures() {
       () => CredentialsApiService(sl(instanceName: "CredentialsDio")));
   sl.registerLazySingleton<StuffApiService>(
       () => StuffApiService(sl(instanceName: "InternalDio")));
-  sl.registerLazySingleton<GoogleSignIn>(() => GoogleSignIn(
-        scopes: ['email'],
-      ));
   sl.registerLazySingleton<CottageApiService>(
       () => CottageApiService(sl(instanceName: "InternalDio")));
   sl.registerLazySingleton<LocationService>(() => LocationService(sl()));

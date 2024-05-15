@@ -56,38 +56,4 @@ void main() {
     });
   });
 
-  group("TryGoogleLoginEvent", () {
-    test(
-        "should call googleLogin method from login usecase to log the user and emit Logged state when return a User",
-        () async {
-      when(mockLoginUseCase.googleLogin())
-          .thenAnswer((_) => Stream.value(const User(mail: "")));
-
-      expectLater(
-          bloc.stream,
-          emitsInOrder([
-            GoogleSignInLoading(),
-            Logged(),
-          ]));
-
-      bloc.add(TryGoogleLoginEvent());
-      await untilCalled(mockLoginUseCase.googleLogin());
-      verify(mockLoginUseCase.googleLogin());
-    });
-
-    test("should emit [Error] when the googleLogin method returns an error",
-        () async {
-      when(mockLoginUseCase.googleLogin())
-          .thenAnswer((_) => Stream.error(WrongIds));
-
-      expectLater(
-          bloc.stream,
-          emitsInOrder([
-            GoogleSignInLoading(),
-            GoogleSignInError(message: GOOGLE_SIGNIN_ERROR),
-          ]));
-
-      bloc.add(TryGoogleLoginEvent());
-    });
-  });
 }

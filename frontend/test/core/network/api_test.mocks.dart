@@ -10,19 +10,15 @@ import 'package:avecpaulette/core/local_data_source/credentials_local_data_sourc
 import 'package:avecpaulette/features/credentials/data/datasources/credentials_api_service.dart'
     as _i11;
 import 'package:avecpaulette/features/credentials/data/models/api/forget_password_request.dart'
-    as _i20;
+    as _i18;
 import 'package:avecpaulette/features/credentials/data/models/api/forget_password_response.dart'
-    as _i19;
+    as _i17;
 import 'package:avecpaulette/features/credentials/data/models/api/login_request.dart'
     as _i15;
 import 'package:avecpaulette/features/credentials/data/models/api/login_response.dart'
     as _i14;
-import 'package:avecpaulette/features/credentials/data/models/api/oauth_request.dart'
-    as _i17;
-import 'package:avecpaulette/features/credentials/data/models/api/oauth_response.dart'
-    as _i16;
 import 'package:avecpaulette/features/credentials/data/models/api/refresh_token_response.dart'
-    as _i18;
+    as _i16;
 import 'package:avecpaulette/features/credentials/data/models/api/signup_request.dart'
     as _i13;
 import 'package:avecpaulette/features/credentials/data/models/api/signup_response.dart'
@@ -924,33 +920,24 @@ class MockCredentialsApiService extends _i1.Mock
         returnValue: _i8.Stream<_i14.LoginResponse>.empty(),
       ) as _i8.Stream<_i14.LoginResponse>);
   @override
-  _i8.Stream<_i16.OAuthResponse> oauth(_i17.OAuthRequest? oAuthRequest) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #oauth,
-          [oAuthRequest],
-        ),
-        returnValue: _i8.Stream<_i16.OAuthResponse>.empty(),
-      ) as _i8.Stream<_i16.OAuthResponse>);
-  @override
-  _i8.Stream<_i18.RefreshTokenResponse> refreshToken(String? refreshToken) =>
+  _i8.Stream<_i16.RefreshTokenResponse> refreshToken(String? refreshToken) =>
       (super.noSuchMethod(
         Invocation.method(
           #refreshToken,
           [refreshToken],
         ),
-        returnValue: _i8.Stream<_i18.RefreshTokenResponse>.empty(),
-      ) as _i8.Stream<_i18.RefreshTokenResponse>);
+        returnValue: _i8.Stream<_i16.RefreshTokenResponse>.empty(),
+      ) as _i8.Stream<_i16.RefreshTokenResponse>);
   @override
-  _i8.Stream<_i19.ForgetPasswordResponse> forgetPassword(
-          _i20.ForgetPasswordRequest? forgetPasswordRequest) =>
+  _i8.Stream<_i17.ForgetPasswordResponse> forgetPassword(
+          _i18.ForgetPasswordRequest? forgetPasswordRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #forgetPassword,
           [forgetPasswordRequest],
         ),
-        returnValue: _i8.Stream<_i19.ForgetPasswordResponse>.empty(),
-      ) as _i8.Stream<_i19.ForgetPasswordResponse>);
+        returnValue: _i8.Stream<_i17.ForgetPasswordResponse>.empty(),
+      ) as _i8.Stream<_i17.ForgetPasswordResponse>);
 }
 
 /// A class which mocks [RequestInterceptorHandler].

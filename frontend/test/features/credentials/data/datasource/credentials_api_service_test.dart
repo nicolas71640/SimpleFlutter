@@ -1,7 +1,6 @@
 import 'package:avecpaulette/features/credentials/data/datasources/credentials_api_service.dart';
 import 'package:avecpaulette/features/credentials/data/models/api/forget_password_request.dart';
 import 'package:avecpaulette/features/credentials/data/models/api/login_request.dart';
-import 'package:avecpaulette/features/credentials/data/models/api/oauth_request.dart';
 import 'package:avecpaulette/features/credentials/data/models/api/signup_request.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -107,27 +106,6 @@ void main() {
 
       expect(credentialsApiService.refreshToken("refreshToken"),
           emitsError(dioError));
-    });
-  });
-
-  group("oauth", () {
-    test("should return a AuthenticationResponse when no error is thrown ",
-        () async {
-      final jsonResponse = fixtureJson("credentials/oauth_ok.json");
-      when(mockDio.post(any, data: anyNamed("data"))).thenAnswer(
-          (realInvocation) async => Response(
-              requestOptions: RequestOptions(path: ""),
-              statusCode: 200,
-              data: jsonResponse));
-      final oAuthRequest = OAuthRequest("idToken");
-
-      final oAuthResponse =
-          await credentialsApiService.oauth(oAuthRequest).first;
-
-      expect(oAuthResponse.email, equals(jsonResponse["email"]));
-      expect(oAuthResponse.accessToken, equals(jsonResponse["accessToken"]));
-      expect(oAuthResponse.refreshToken, equals(jsonResponse["refreshToken"]));
-      verify(mockDio.post("/auth/oauth", data: oAuthRequest.toJson()));
     });
   });
 

@@ -1,5 +1,4 @@
 import 'package:avecpaulette/features/credentials/data/datasources/credentials_api_service.dart';
-import 'package:avecpaulette/features/credentials/data/models/api/oauth_response.dart';
 import 'package:avecpaulette/features/credentials/domain/entities/user.dart';
 import 'package:avecpaulette/features/credentials/presentation/bloc/forgotten_password_bloc.dart';
 import 'package:avecpaulette/features/credentials/presentation/bloc/signup_bloc.dart';
@@ -13,7 +12,6 @@ import 'package:avecpaulette/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:avecpaulette/features/credentials/data/models/api/forget_password_response.dart';
@@ -27,9 +25,6 @@ import 'package:location/location.dart' as location_package;
 import '../robots/home_robot.dart';
 
 @GenerateMocks([
-  GoogleSignIn,
-  GoogleSignInAccount,
-  GoogleSignInAuthentication,
   CredentialsApiService,
   location_package.Location,
   location_package.LocationData,
@@ -39,20 +34,11 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
 
-  late MockGoogleSignIn mockGoogleSignIn;
-  late MockGoogleSignInAccount mockGoogleSignInAccount;
-  late MockGoogleSignInAuthentication mockGoogleSignInAuthentication;
   late MockLocation mockLocation;
   late MockSuggestionService mockSuggestionService;
 
   setUp(() async {
     init();
-    sl.unregister<GoogleSignIn>();
-    mockGoogleSignIn = MockGoogleSignIn();
-    mockGoogleSignInAccount = MockGoogleSignInAccount();
-    mockGoogleSignInAuthentication = MockGoogleSignInAuthentication();
-    sl.registerLazySingleton<GoogleSignIn>(() => mockGoogleSignIn);
-
     sl.unregister<location_package.Location>();
     mockLocation = MockLocation();
     final locationData = MockLocationData();
@@ -154,32 +140,6 @@ void main() {
       await signupRobot.signup();
 
       expect(find.text(COULD_NOT_SIGNUP_MESSAGE), findsOneWidget);
-    },
-  );
-
-  testWidgets(
-    "should go to the next page when google signin success",
-    (WidgetTester tester) async {
-      final loginRobot = LoginRobot(tester);
-      final mockCredentialsApiService = MockCredentialsApiService();
-      sl.unregister<CredentialsApiService>();
-      sl.registerSingleton<CredentialsApiService>(mockCredentialsApiService);
-      when(mockCredentialsApiService.oauth(any))
-          .thenAnswer((_) => Stream.value(OAuthResponse(
-                "email",
-                "accessToken",
-                "refreshToken",
-              )));
-      when(mockGoogleSignIn.signIn())
-          .thenAnswer((_) => Future.value(mockGoogleSignInAccount));
-      when(mockGoogleSignInAccount.authentication)
-          .thenAnswer((_) => Future.value(mockGoogleSignInAuthentication));
-      when(mockGoogleSignInAuthentication.idToken).thenAnswer((_) => "idToken");
-
-      await AppRobot(tester).startApp();
-      await loginRobot.signInWithGoogle();
-
-      expect(find.byType(GoogleMap), findsOneWidget);
     },
   );
 
